@@ -13,6 +13,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -25,4 +26,6 @@ yarn-error.log*
 #interno
 ConsultarSunrise-copia.js 
 ConsultarSunrise-copia_BIEN_comentarios_y_funciones_descartadas_EJEMPLOS.js
-SunriseDisplay-copia.js SunriseDisplay-copia_Avanzada.js 
+SunriseDisplay-copia.js 
+SunriseDisplay-copia_Avanzada.js 
+_SunriseDisplay.js
