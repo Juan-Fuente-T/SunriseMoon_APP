@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#interno
+ConsultarSunrise-copia.js 
+ConsultarSunrise-copia_BIEN_comentarios_y_funciones_descartadas_EJEMPLOS.js
+SunriseDisplay-copia.js SunriseDisplay-copia_Avanzada.js 

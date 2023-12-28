@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
+//import './App.css';
+import React, { useState } from 'react';
+import ImputForm from './components/ImputForm';
+import SunriseDisplay from './components/SunriseDisplay';
+import { ChakraProvider, Flex, Box, Heading, Divider } from '@chakra-ui/react';
+import { sunrise } from './components/ConsultarSunrise';  // Corregir la importación
+
 
 function App() {
+  // Definir estado inicial para los datos 
+  const [sunriseMoonData, setSunriseMoonData] = useState({});
+
+
+  async function consultarSunrise(inputValue) {
+    try {
+      const { sunriseTime, sunsetTime, moonData, moonImage, hasError } = await sunrise(inputValue);
+
+      // Actualizar el estado con los datos obtenidos
+      setSunriseMoonData({
+        sunriseTime,
+        sunsetTime,
+        moonData,
+        moonImage,
+        hasError,
+      });
+      //console.log("ErrorAPP:", sunriseMoonData.hasError);
+    } catch (error) {
+      console.error(`Error al consultar la hora del amanecer/anocheer/fase lunar: ${error.message}`);
+    }
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Box p='3' mx="auto" maxW="600px" height={'100%'} backgroundColor={'#262626'} >
+        <Flex flexDirection={'row'} justifyContent={'center'}>
+          {/* Se renderiza el componente ImputForm y se pasan los datos solares y de fase lunar como prop */}
+          <Box textAlign="center" p={4} backgroundColor={'#52525B'} borderRadius="10px" maxWidth={'100%'}  >
+            <Heading as="h1" fontSize={'xx-large'} color={'#D4D4D8'} >
+              Consulta de horario solar y fase lunar
+            </Heading>
+            <ImputForm consultarSunrise={consultarSunrise} />
+          </Box>
+        </Flex>
+        <Box>
+          <Divider my={4} />
+        </Box>
+
+        {/* Se renderiza el componente SunriseDisplay y se pasan los datos solares y de fase lunar como prop */}
+        <Box>
+          {/*<SunriseDisplay sunriseMoonData={sunriseMoonData || {}} />*/}
+          <SunriseDisplay sunriseMoonData={sunriseMoonData} />
+        </Box>
+      </Box>
+    </ChakraProvider >
   );
 }
+export default App; // Se exporta el componente App para su uso 
 
-export default App;
+
+
