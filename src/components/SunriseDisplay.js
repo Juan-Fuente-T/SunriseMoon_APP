@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Box, Heading, Flex, ChakraProvider } from '@chakra-ui/react';
 import InfoWindow from './InfoWindow';
-import { scrollableText } from '../styles';
 import defaultImage from '../moonImages/default-image.png';
 import errorImage from '../moonImages/error-image.png';
 import moonImage0 from '../moonImages/moonImage0.png';
