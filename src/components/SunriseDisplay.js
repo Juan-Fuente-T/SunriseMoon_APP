@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Box, Heading, Flex, ChakraProvider } from '@chakra-ui/react';
 import InfoWindow from './InfoWindow';
+import { scrollableText } from '../styles';
 import defaultImage from '../moonImages/default-image.png';
 import errorImage from '../moonImages/error-image.png';
 import moonImage0 from '../moonImages/moonImage0.png';
@@ -11,6 +12,14 @@ import moonImage04 from '../moonImages/moonImage04.png';
 import moonImage05 from '../moonImages/moonImage05.png';
 import moonImage06 from '../moonImages/moonImage06.png';
 import moonImage07 from '../moonImages/moonImage07.png';
+
+
+// Se define la velocidad de desplazamiento
+const scrollSpeed = 30;
+
+// Se define el ancho de contenido y contenedor (ajusta según sea necesario)
+const contentWidth = 500;
+const containerWidth = 300;
 
 
 function SunriseDisplay({ sunriseMoonData }) {
@@ -64,122 +73,34 @@ function SunriseDisplay({ sunriseMoonData }) {
     // Efecto para actualizar el estado cuando cambian los datos
     useEffect(() => {
         setCurrentmoonData(initialmoonData);
+
+        const content = document.getElementById('scrollContainer');
+
+        // Función para el desplazamiento
+        const scrollText = () => {
+            if (content) {
+                content.style.transform = `translateX(${containerWidth}px)`;
+                const animationDuration = (contentWidth / scrollSpeed) * 1000;
+
+                content.style.transition = `transform ${animationDuration}ms linear`;
+                content.style.transform = `translateX(-${contentWidth}px)`;
+            }
+        };
+
+        // Llamada a la función de desplazamiento al renderizar el componente
+        scrollText();
+
+        // Reinicia el desplazamiento cuando termine la animación
+        content?.addEventListener('transitionend', () => {
+            content.style.transition = 'none';
+            content.style.transform = `translateX(${containerWidth}px)`;
+            setTimeout(scrollText, 500);
+        });
+
     }, [initialmoonData]);
 
 
-    // Define el componente WeatherDisplay
-    /*function SunriseDisplay({ sunriseMoonData }) {
-        console.log("SunriseDisplay recibió los siguientes datos:", sunriseMoonData);
-    
-        // Se extraen los datos iniciales de moonData
-        const initialmoonData = sunriseMoonData?.moonData || {};
-        const moonImage = sunriseMoonData?.moonImage || 'defaultImage';
-    
-    
-        //console.log("sunriseMoonData", sunriseMoonData);
-        //console.log("sunriseMoonData.moonData", sunriseMoonData.moonData);
-        //console.log("sunriseMoonData.moonData.nextFullMoon", sunriseMoonData.moonData.nextFullMoon);
-    
-    
-        //const moonImage = sunriseMoonData?.moonImage || 'defaultImage';
-        console.log("SUNRISEDisplayMoonImage", moonImage);
-    
-        // Verificar si moonData está definido antes de intentar acceder a sus propiedades
-        const moonDataAvailable = Object.keys(initialmoonData).length > 0;
-    
-        // Se inicializan los estados con los datos iniciales
-        const [currentmoonData, setCurrentmoonData] = useState(initialmoonData);
-    
-    
-        //const initialRespuestaOpenAI = datosMeteorologicos?.respuesta_openAI || 'No disponible';
-    
-        // Se nicializan los estados con los datos iniciales
-        //const [currentSunrise, setCurrentSunrise] = useState(initialCurrentSunrise);
-        //const [currentMoonPhase, setCurrentMoonPhase] = useState(initialMoonPhase);
-        //const [respuestaOpenAI, setRespuestaOpenAI] = useState(initialRespuestaOpenAI);
-    
-        const containerRef = useRef(null);
-        const contentRef = useRef(null);
-    
-        // Llamada a datos e impresiones para depuración en la consola
-        /*const temperaturaActual = datosMeteorologicos?.respuesta_openAI;
-        console.log("Temp. actual", temperaturaActual);
-        console.log("Datos meteorológicos", datosMeteorologicos);
-        console.log("Initial current Weather", initialCurrentWeather);
-        console.log("Initial daily Forecast", initialDailyForecast);
-        console.log("Temp-max-antes:",dailyForecast.apparent_temperature_max);
-        console.log("Initial AI",initialRespuestaOpenAI);*/
 
-    // Se actualizan los estados cuando cambian los datos
-    /*useEffect(() => {
-        if (sunriseMoonData && sunriseMoonData.moonData) {
-            const currentmoonData = sunriseMoonData.moonData || {};
-    
-            console.log("Current Sunrise Data:", currentmoonData);
-    
-            const container = containerRef.current;
-            const content = contentRef.current;
-    
-            if (container & content) {
-    
-                const scrollSpeed = 30; // Ajusta la velocidad de desplazamiento según tus preferencias
-                const contentWidth = content.clientWidth;
-                const containerWidth = container.clientWidth;
-    
-                //Funcion que desplaza el texto en la ventana principal
-                function scrollText() {
-                    if (contentWidth > containerWidth) {
-                        content.style.transform = `translateX(${containerWidth}px)`; // Inicializa la posición del texto
-                        const animationDuration = (contentWidth / scrollSpeed) * 1000;
-    
-                        content.style.transition = `transform ${animationDuration}ms linear`;
-                        content.style.transform = `translateX(-${contentWidth}px)`; // Desplaza el texto
-                    }
-                }
-    
-                scrollText();
-    
-                // Reinicia el desplazamiento cuando termine la animación
-                content.addEventListener('transitionend', () => {
-                    content.style.transition = 'none';
-                    content.style.transform = `translateX(${containerWidth}px)`;
-                    setTimeout(scrollText, 500); // Pausa antes de reiniciar
-                });
-            }
-    
-    
-            // Actualizamos los estados con los datos de datosMeteorologicos
-            //setCurrentSunrise(moonData.moonData?.daily || {});
-            //setCurrentMoonPhase(moonData?.moonData.data || {});
-            //setRespuestaOpenAI(datosMeteorologicos?.respuesta_openAI || 'No disponible');
-    
-            // Actualizamos los estados con los datos de moonData
-            setCurrentmoonData(currentmoonData);
-        } else {
-            // Si sunriseMoonData o sunriseMoonData.moonData es undefined, podemos manejarlo aquí
-            console.error('Datos de amanecer no disponibles');
-        }
-    }, [sunriseMoonData]); // Ahora escuchamos cambios solo en moonData*/
-
-
-    /*
-         //Función para manejar cambios en sunrise/sunset
-        const handleCurrentWeatherChange = (key, newValue) => {
-            console.log(`Cambio en ${key}: ${newValue}`);
-            setCurrentWeather((prevWeather) => ({
-                ...currentWeather,
-                [key]: newValue,
-            }));
-        };
-     
-        // Función para manejar cambios en el pronóstico diario
-        const handleDailyForecastChange = (key, newValue) => {
-            setDailyForecast((prevWeather) => ({
-                ...dailyForecast,
-                [key]: newValue,
-            }));
-        };
-    */
 
     // Se renderiza el componente que muestra las respuestas, SunriseDisplay
     return (
@@ -229,25 +150,27 @@ function SunriseDisplay({ sunriseMoonData }) {
                 </Heading>
                 <Flex p={4}
                     maxW={'100%'}
-                    flexDirection={'row'}
+                    flexDirection={['column', 'row']}
                     //flexDirection={useBreakpointValue({ base: "column", md: "row", lg: "row" })}
-                    justifyContent={'space-around'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    alignContent={'center'}
                     backgroundColor={'#D4D4D8'}
                     borderRadius="10px"
                 >
                     <Box maxWidth={'100%'} alignItems={'center'}>
                         <img src={displayedImage} alt="Icono de fase lunar" style={{ width: '250px', borderRadius: '10px', margin: '0', justifyContent: 'center', alignContent: 'center' }} />
                     </Box>
-                    <Flex ml={'2'} flexDirection={'column'} alignContent={'flex-end'} justifyContent={'center'} >
+                    <Flex ml={'2'} flexDirection={'column'} alignContent={'center'} align={'center'} alignItems={'center'} justifyContent={'center'} >
                         <Box>
-                            <Heading as="h3" size="md" mb={2} textAlign={'center'}>
+                            <Heading as="h3" size="md" mb={2} mt={2} textAlign={'center'}>
                                 Fase Lunar Actual
                             </Heading>
                             <InfoWindow
+                                className={scrollableText}
                                 label="Fase lunar"
                                 value={currentmoonData.moonPhase || ''}
                                 onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, moonPhase: value }))}
-                                customClassName='scroll-fast' // Se asigna una clase CSS específica para controlar la velocidad de desplazamiento
                             />
                         </Box>
                         <Box>
@@ -255,10 +178,10 @@ function SunriseDisplay({ sunriseMoonData }) {
                                 Próxima Luna Llena
                             </Heading>
                             <InfoWindow
+                                className={scrollableText}
                                 label="Próxima Luna Llena"
                                 value={currentmoonData?.nextFullMoon || ''}
                                 onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, nextFullMoon: { ...prevData.nextFullMoon, datetime: value } }))}
-                                customClassName='scroll-fast' // Se asigna una clase CSS específica para controlar la velocidad de desplazamiento
                             />
                         </Box>
                     </Flex>
@@ -271,7 +194,7 @@ function SunriseDisplay({ sunriseMoonData }) {
 
 
             {/* Puedes seguir renderizando más contenido aquí */}
-        </ChakraProvider>
+        </ChakraProvider >
     );
 }
 

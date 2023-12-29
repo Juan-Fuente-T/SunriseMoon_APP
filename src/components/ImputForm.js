@@ -36,16 +36,15 @@ function ImputForm({ consultarSunrise }) {
             <Input
                 type="text"
                 color={'#FAFAFA'}
-                placeholder="Localidad o código postal"
+                placeholder={['Localidad o código postal']}
                 _placeholder={{ color: '#FAFAFA' }}
                 //_hover={{ _placeholder: { color: '#262626' } }}
                 value={inputValue}
                 onChange={handleInputChange} // Se asocia la función de cambio al evento onChange
                 onClick={handleInputClick} // Se asocia la función de hacer click con el borrado del dato anterior
                 onKeyDown={handleKeyPress}   // Se asocia la función de pulsación de tecla al evento onKeyPress
-                size="lg"
-                maxWidth={'70%'}
-                fontSize={["sm", "md", "lg", "xl"]}
+                fontSize={["xs", "sm", "md", "lg"]}
+                maxWidth={['100%', '70%']}
                 fontWeight="bold"
                 textAlign={'center'}
                 border={'2px'}
@@ -55,7 +54,7 @@ function ImputForm({ consultarSunrise }) {
                 focusBorderColor='#262626'
                 backgroundColor={'#262626'}
             />
-            <Button m={'3'} maxWidth={'150'} fontSize={'18px'} border={'2px'}
+            <Button m={'3'} maxWidth={["sm"]} fontSize={["sm", "md", "lg"]} border={'2px'}
                 borderColor={'#262626'} color="#262626" backgroundColor={'#D4D4D8'} _hover={{ backgroundColor: '#262626', color: '#D4D4D8', borderColor: '#D4D4D8' }} onClick={handleConsultaClick}>
                 Consultar
             </Button>

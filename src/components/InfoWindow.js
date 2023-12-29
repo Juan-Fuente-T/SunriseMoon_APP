@@ -15,14 +15,15 @@ function InfoWindow({ label, value, onChange, customClassName }) {
                     borderWidth="5px"
                     borderRadius="10px"
                     textAlign={'center'}
-                    mb="3"
+                    m="2"
                     borderColor={'#262626'}
                     //overflowX="auto"
-                    width="90%"
+                    width="100%"
                     //style={{ whiteSpace: 'nowrap' }}
                     justifyContent={'center'}
                     alignItems={'center'}
-                    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'visible' }}
+                    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'auto' }}
+
                 >
                     {/* Cuadro de entrada de texto */}
                     <Input
