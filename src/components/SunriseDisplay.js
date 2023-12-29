@@ -76,27 +76,6 @@ function SunriseDisplay({ sunriseMoonData }) {
 
         const content = document.getElementById('scrollContainer');
 
-        // Función para el desplazamiento
-        const scrollText = () => {
-            if (content) {
-                content.style.transform = `translateX(${containerWidth}px)`;
-                const animationDuration = (contentWidth / scrollSpeed) * 1000;
-
-                content.style.transition = `transform ${animationDuration}ms linear`;
-                content.style.transform = `translateX(-${contentWidth}px)`;
-            }
-        };
-
-        // Llamada a la función de desplazamiento al renderizar el componente
-        scrollText();
-
-        // Reinicia el desplazamiento cuando termine la animación
-        content?.addEventListener('transitionend', () => {
-            content.style.transition = 'none';
-            content.style.transform = `translateX(${containerWidth}px)`;
-            setTimeout(scrollText, 500);
-        });
-
     }, [initialmoonData]);
 
 
@@ -129,7 +108,6 @@ function SunriseDisplay({ sunriseMoonData }) {
                             label="Amanecer"
                             value={sunriseMoonData?.sunriseTime || ''}
                             onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, sunriseTime: value }))}
-                            customClassName='scroll-fast' // Se asigna una clase CSS específica para controlar la velocidad de desplazamiento
                         />
                     </Box>
                     <Box>
@@ -140,7 +118,6 @@ function SunriseDisplay({ sunriseMoonData }) {
                             label="Anochecer"
                             value={sunriseMoonData?.sunsetTime || ''}
                             onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, sunsetTime: value }))}
-                            customClassName='scroll-fast' // Se asigna una clase CSS específica para controlar la velocidad de desplazamiento
                         />
                     </Box>
                 </Flex >
@@ -167,7 +144,6 @@ function SunriseDisplay({ sunriseMoonData }) {
                                 Fase Lunar Actual
                             </Heading>
                             <InfoWindow
-                                className={scrollableText}
                                 label="Fase lunar"
                                 value={currentmoonData.moonPhase || ''}
                                 onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, moonPhase: value }))}
@@ -178,7 +154,6 @@ function SunriseDisplay({ sunriseMoonData }) {
                                 Próxima Luna Llena
                             </Heading>
                             <InfoWindow
-                                className={scrollableText}
                                 label="Próxima Luna Llena"
                                 value={currentmoonData?.nextFullMoon || ''}
                                 onChange={(value) => setCurrentmoonData((prevData) => ({ ...prevData, nextFullMoon: { ...prevData.nextFullMoon, datetime: value } }))}

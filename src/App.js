@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import ImputForm from './components/ImputForm';
 import SunriseDisplay from './components/SunriseDisplay';
-import { ChakraProvider, Flex, Box, Heading, Divider } from '@chakra-ui/react';
-import { sunrise } from './components/ConsultarSunrise';  // Corregir la importación
+import { ChakraProvider, Flex, Box, Heading, Divider, VStack } from '@chakra-ui/react';
+import { sunrise } from './components/ConsultarSunrise';
 
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Box p='3' mx="auto" maxW="600px" height={'100%'} backgroundColor={'#262626'} >
+      <Box p='3' mx="auto" maxW="600px" height={'790px'} backgroundColor={'#262626'} display="flex" flexDirection="column" justifyContent="center" alignItems={'center'} marginY="auto">
         <Flex flexDirection={'row'} justifyContent={'center'}>
           {/* Se renderiza el componente ImputForm y se pasan los datos solares y de fase lunar como prop */}
           <Box textAlign="center" p={4} backgroundColor={'#52525B'} borderRadius="10px" maxWidth={'100%'}  >
@@ -54,6 +54,7 @@ function App() {
         </Box>
       </Box>
     </ChakraProvider >
+
   );
 }
 export default App; // Se exporta el componente App para su uso 
