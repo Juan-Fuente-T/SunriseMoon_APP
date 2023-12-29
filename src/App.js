@@ -33,7 +33,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Box p='3' mx="auto" maxW="600px" height={['1020px', '790px']} backgroundColor={'#262626'} display="flex" flexDirection="column" justifyContent="center" alignItems={'center'} marginY="auto">
+      <Box p='3' mx="auto" maxW={['100%', '600px']} height={['100%', '790px']} backgroundColor={'#262626'} display="flex" flexDirection="column" justifyContent="center" alignItems={'center'} marginY="auto" overflow="hidden" >
         <Flex flexDirection={'row'} justifyContent={'center'}>
           {/* Se renderiza el componente ImputForm y se pasan los datos solares y de fase lunar como prop */}
           <Box textAlign="center" p={4} backgroundColor={'#52525B'} borderRadius="10px" maxWidth={'100%'}  >
@@ -60,4 +60,4 @@ function App() {
 export default App; // Se exporta el componente App para su uso 
 
 
-
+/*    <Box p='3' mx="auto" maxW={['100%', '600px']} height={['1020px', '790px']} backgroundColor={'#262626'} display="flex" flexDirection="column" justifyContent="center" alignItems={'center'} marginY="auto" overflow="hidden" > */
