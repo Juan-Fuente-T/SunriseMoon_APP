@@ -32,7 +32,7 @@ function ImputForm({ consultarSunrise }) {
     };
 
     return (
-        <Box display={'flex'} flexDirection={'row'} justifyContent={'space-around'} alignItems={'center'} m={'3'} maxWidth={'100%'} >
+        <Box display={'flex'} flexDirection={['column', 'row']} justifyContent={'space-around'} alignItems={'center'} m={'2'} maxWidth={'100%'} >
             <Input
                 type="text"
                 color={'#FAFAFA'}
