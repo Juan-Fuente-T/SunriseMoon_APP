@@ -1,4 +1,4 @@
-# Lunar Phase and Sun Times App
+# App fase lunar y horarios solares
 
 ## Description
 This web application allows users to retrieve the current moon phase and precise sunrise and sunset times. You can use any location in the world or a postal code in Spain. The app provides accurate and up-to-date information using data from reliable sources.
