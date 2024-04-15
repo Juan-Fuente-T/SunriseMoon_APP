@@ -124,7 +124,7 @@ function obtainMoonImage(_moonPhase) {
 // Función que verifica si la ubicación introducida es válida (solo letras y espacios)
 function isLocation(inputValue) {
     const locationPattern = /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/;
-    //console.log("Funcion isLocation", locationPattern.test(inputValue));
+    console.log("Funcion isLocation", locationPattern.test(inputValue));
     return locationPattern.test(inputValue);
 }
 
@@ -140,7 +140,7 @@ async function geocodePostalCode(postalCode) {
 
     try {
         const response = await axios.get(geocodeApiUrl);
-        //console.log("DatosGeoPostalCode", response);
+        console.log("DatosGeoPostalCode", response);
         const locationData = response.data[0];
 
         if (!locationData) {
@@ -150,8 +150,8 @@ async function geocodePostalCode(postalCode) {
         const { display_name } = locationData;
 
         // Extracción de la primera parte del nombre de la localidad
-        const cityName = display_name.split(',')[0].trim();
-        //console.log("Nombre de la cityName", cityName);
+        const cityName = display_name.split(',')[1].trim();
+        console.log("Nombre de la cityName", cityName);
         return { cityName };
     } catch (error) {
         console.error(error.message);
@@ -189,7 +189,6 @@ async function geocodeLocation(location) {
 
 async function getTimezone(latitude, longitude) {
     const myApiKey = process.env.REACT_APP_API_KEY;
-    console.log(myApiKey);
     const timezoneApiUrl = `https://api.ipgeolocation.io/timezone?apiKey=${myApiKey}&lat=${latitude}&lon=${longitude}`;
 
     try {
