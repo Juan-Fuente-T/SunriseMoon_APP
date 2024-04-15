@@ -13,14 +13,6 @@ import moonImage06 from '../moonImages/moonImage06.png';
 import moonImage07 from '../moonImages/moonImage07.png';
 
 
-// Se define la velocidad de desplazamiento
-const scrollSpeed = 30;
-
-// Se define el ancho de contenido y contenedor (ajusta según sea necesario)
-const contentWidth = 500;
-const containerWidth = 300;
-
-
 function SunriseDisplay({ sunriseMoonData }) {
     // Se extraen los datos iniciales de moonData
     const initialmoonData = useMemo(() => sunriseMoonData?.moonData || {}, [sunriseMoonData]);
@@ -30,7 +22,6 @@ function SunriseDisplay({ sunriseMoonData }) {
     let displayedImage;
 
     if (typeof sunriseMoonData?.moonData?.hasError !== "undefined") {
-        const hasError = sunriseMoonData?.moonData.hasError;
         console.log("ErrorDISPLAY:", sunriseMoonData.moonData.hasError);
         displayedImage = errorImage;
     } else {
@@ -72,8 +63,6 @@ function SunriseDisplay({ sunriseMoonData }) {
     // Efecto para actualizar el estado cuando cambian los datos
     useEffect(() => {
         setCurrentmoonData(initialmoonData);
-
-        const content = document.getElementById('scrollContainer');
 
     }, [initialmoonData]);
 
@@ -161,13 +150,6 @@ function SunriseDisplay({ sunriseMoonData }) {
                     </Flex>
                 </Flex>
             </Box>
-
-
-            {/* Agrega más secciones según sea necesario */}
-
-
-
-            {/* Puedes seguir renderizando más contenido aquí */}
         </ChakraProvider >
     );
 }

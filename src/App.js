@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ImputForm from './components/ImputForm';
 import SunriseDisplay from './components/SunriseDisplay';
-import { ChakraProvider, Flex, Box, Heading, Divider, VStack } from '@chakra-ui/react';
+import { ChakraProvider, Flex, Box, Heading, Divider} from '@chakra-ui/react';
 import { sunrise } from './components/ConsultarSunrise';
 
 
